@@ -1,0 +1,82 @@
+{% load static %}
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+  <div class="container">
+    <a class="navbar-brand me-4" href="{% url 'home' %}">Fatima's Restaurant</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav gap-2 align-items-center">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="{% url 'home' %}">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="{% url 'about' %}">About</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="{% url 'product' %}">Products</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="{% url 'contact' %}">Contact</a>
+        </li>
+      </ul>
+      <div class="d-flex align-items-center gap-2 ms-auto flex-nowrap">
+        <form class="d-flex align-items-center gap-2" role="search" method="get" action="{% url 'findproduct' %}">
+          <input class="form-control nav-search" type="search" name="prod_search" placeholder="Search" aria-label="Search" value="{{ request.GET.prod_search|default:'' }}" />
+          <button class="btn btn-outline-light btn-sm" type="submit">Search</button>
+        </form>
+        <div class="d-flex gap-2 align-items-center flex-nowrap">
+          {% if request.user.is_authenticated %}
+          <span class="nav-link text-white py-0 px-2 mb-0">Welcome, {{ request.user.username }}</span>
+          <a class="nav-link active py-0 px-2" href="{% url 'logout' %}">Logout</a>
+          {% else %}
+          <a class="nav-link active py-0 px-2" href="{% url 'loginuser' %}">Login</a>
+          <a class="nav-link active py-0 px-2" href="{% url 'signupuser' %}">Register</a>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&display=swap');
+  .navbar-brand {
+    font-family: 'Dancing Script', cursive;
+    font-size: 1.75rem;
+    color: #ffffff !important;
+    font-weight: 700;
+  }
+  .navbar {
+    background: #081c3b !important;
+  }
+  .nav-link {
+    color: #ffffff !important;
+    background: transparent !important;
+    border-radius: 0.35rem;
+    margin-right: 0.35rem;
+    padding: 0.45rem 0.7rem;
+  }
+  .nav-link.active {
+    color: #87cefa !important;
+    background: transparent !important;
+    font-weight: 600;
+  }
+  .nav-link:hover {
+    color: #87cefa !important;
+    background: rgba(255,255,255,0.08) !important;
+  }
+  .btn-outline-light {
+    border-color: rgba(255,255,255,.65);
+    padding: 0.35rem 0.8rem;
+  }
+  .nav-search {
+    min-width: 120px;
+    max-width: 220px;
+    background: rgba(255,255,255,0.08);
+    border-color: rgba(255,255,255,0.25);
+    color: #fff;
+  }
+  .nav-search::placeholder {
+    color: rgba(255,255,255,0.7);
+  }
+</style>

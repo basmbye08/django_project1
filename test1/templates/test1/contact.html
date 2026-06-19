@@ -1,0 +1,168 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Fatima's Restaurant</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .contact-hero {
+            padding: 80px 0 30px;
+            background: linear-gradient(135deg, #87cefa 0%, #b0e0e6 100%);
+            color: #fff;
+        }
+        .info-card {
+            border: none;
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+        .info-card:hover {
+            transform: translateY(-4px);
+        }
+        .form-section {
+            background: white;
+            border-radius: 0.75rem;
+            padding: 40px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .btn-submit {
+            background: linear-gradient(135deg, #87cefa 0%, #b0e0e6 100%);
+            border: none;
+            color: white;
+            font-weight: 600;
+        }
+        .btn-submit:hover {
+            background: linear-gradient(135deg, #7abde3 0%, #a5d9df 100%);
+            color: white;
+        }
+        .alert-success {
+            border-radius: 0.75rem;
+        }
+    </style>
+</head>
+<body>
+    {% include 'test1/navbar.html' %}
+
+    <section class="contact-hero text-center">
+        <div class="container">
+            <h1 class="display-4 fw-bold">Contact Us</h1>
+            <p class="lead mx-auto">We'd love to hear from you! Get in touch with Fatima's Restaurant.</p>
+        </div>
+    </section>
+
+    <main class="container my-5">
+        {% if messages %}
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            {% for message in messages %}
+            <strong>Success!</strong> {{ message }}
+            {% endfor %}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        {% endif %}
+
+        <div class="row mb-5">
+            <div class="col-md-4 mb-4">
+                <div class="info-card p-4 h-100">
+                    <div class="text-center mb-3">
+                        <i class="bi bi-geo-alt-fill" style="font-size: 2rem; color: #87cefa;"></i>
+                    </div>
+                    <h5 class="text-center mb-2">Address</h5>
+                    <p class="text-center text-muted small">Serrekunda, The Gambia</p>
+                </div>
+            </div>
+
+            <div class="col-md-4 mb-4">
+                <div class="info-card p-4 h-100">
+                    <div class="text-center mb-3">
+                        <i class="bi bi-telephone-fill" style="font-size: 2rem; color: #87cefa;"></i>
+                    </div>
+                    <h5 class="text-center mb-2">Phone</h5>
+                    <p class="text-center text-muted small">
+                        <a href="tel:+17069957164" class="text-decoration-none">706-995-7164</a>
+                    </p>
+                </div>
+            </div>
+
+            <div class="col-md-4 mb-4">
+                <div class="info-card p-4 h-100">
+                    <div class="text-center mb-3">
+                        <i class="bi bi-envelope-fill" style="font-size: 2rem; color: #87cefa;"></i>
+                    </div>
+                    <h5 class="text-center mb-2">Email</h5>
+                    <p class="text-center text-muted small">
+                        <a href="mailto:basirumbyr4@gmil.com" class="text-decoration-none">basirumbyr4@gmil.com</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="row align-items-center mb-5">
+            <div class="col-md-6 mb-4 mb-md-0">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d8611.544810992145!2d-16.68763544569629!3d13.438364088784432!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xec29980c53a9ac9%3A0x7fe9e864599a6a28!2sSerrekunda%20Market%20Mosque!5e0!3m2!1sen!2sin!4v1781604446265!5m2!1sen!2sin" width="100%" height="400" style="border: none; border-radius: 0.75rem;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+            <div class="col-md-6 ps-md-4">
+                <h3 class="mb-3">Our Hours</h3>
+                <ul class="list-unstyled">
+                    <li class="mb-2"><i class="bi bi-clock"></i> <strong>Monday - Sunday</strong></li>
+                    <li class="text-muted">9:00 AM - 11:30 PM</li>
+                </ul>
+                <div class="mt-4 p-3 bg-light rounded">
+                    <p class="text-muted"><em>At Fatima's, we provide a welcoming place for the community to eat, rest, relax, and laugh together. We look forward to seeing you soon!</em></p>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-section">
+            <h2 class="mb-4">Have Some Questions?</h2>
+            <p class="text-muted mb-4">Fill out the form below and we'll get back to you as soon as possible.</p>
+
+            <form method="post" action="{% url 'contact' %}" novalidate>
+                {% csrf_token %}
+                
+                {% if form.non_field_errors %}
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    {{ form.non_field_errors }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                </div>
+                {% endif %}
+
+                <div class="mb-3">
+                    <label for="{{ form.name.id_for_label }}" class="form-label">Your Name</label>
+                    {{ form.name }}
+                    {% if form.name.errors %}
+                    <div class="invalid-feedback d-block">{{ form.name.errors }}</div>
+                    {% endif %}
+                </div>
+
+                <div class="mb-3">
+                    <label for="{{ form.email.id_for_label }}" class="form-label">Your Email</label>
+                    {{ form.email }}
+                    {% if form.email.errors %}
+                    <div class="invalid-feedback d-block">{{ form.email.errors }}</div>
+                    {% endif %}
+                </div>
+
+                <div class="mb-3">
+                    <label for="{{ form.message.id_for_label }}" class="form-label">Message</label>
+                    {{ form.message }}
+                    {% if form.message.errors %}
+                    <div class="invalid-feedback d-block">{{ form.message.errors }}</div>
+                    {% endif %}
+                </div>
+
+                <button type="submit" class="btn btn-submit btn-lg w-100">Send Message</button>
+            </form>
+        </div>
+    </main>
+
+    {% include 'test1/footer.html' %}
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,57 @@
+{% load static %}
+<footer class="bg-dark text-light py-5 mt-5">
+    <div class="container">
+        <div class="row g-4">
+            <div class="col-md-4 mb-4">
+                <h5 class="fw-bold mb-3">About Us</h5>
+                <p class="small">Fatima's Restaurant is a family-owned eatery serving a wide range of favorites — burgers, pizza, pasta, pastries, and homestyle dishes made from fresh, locally sourced ingredients. We blend traditional recipes with modern touches to create memorable meals for friends and family.</p>
+            </div>
+
+            <div class="col-md-4 mb-4">
+                <h5 class="fw-bold mb-3">Quick Links</h5>
+                <ul class="list-unstyled small">
+                    <li class="mb-2"><a class="text-light text-decoration-none" href="/">Home</a></li>
+                    <li class="mb-2"><a class="text-light text-decoration-none" href="/about/">About Us</a></li>
+                    <li class="mb-2"><a class="text-light text-decoration-none" href="/products/">Products</a></li>
+                    <li class="mb-2"><a class="text-light text-decoration-none" href="/contact/">Contacts</a></li>
+                </ul>
+            </div>
+
+            <div class="col-md-4 mb-4">
+                <h5 class="fw-bold mb-3">Contact</h5>
+                <p class="small mb-1">Address: Serrekunda, The Gambia</p>
+                <p class="small mb-1">Email: <a class="text-light" href="mailto:basirumbyr4@gmil.com">basirumbye4@gmil.com</a></p>
+                <p class="small mb-2">Phone: <a class="text-light" href="tel:+17069957164">706-995-7164</a></p>
+
+                <div class="mb-2">
+                    <a class="btn btn-outline-light btn-sm p-2 me-2" href="https://x.com" target="_blank" rel="noopener noreferrer" aria-label="X">
+                        <i class="bi bi-x fs-4" aria-hidden="true"></i>
+                    </a>
+                    <a class="btn btn-outline-light btn-sm p-2 me-2" href="https://www.facebook.com" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+                        <i class="bi bi-facebook fs-4" aria-hidden="true"></i>
+                    </a>
+                    <a class="btn btn-outline-light btn-sm p-2 me-2" href="https://www.instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+                        <i class="bi bi-instagram fs-4" aria-hidden="true"></i>
+                    </a>
+                    <a class="btn btn-outline-light btn-sm p-2" href="https://www.pinterest.com" target="_blank" rel="noopener noreferrer" aria-label="Pinterest">
+                        <i class="bi bi-pinterest fs-4" aria-hidden="true"></i>
+                    </a>
+                </div>
+
+                <hr class="border-secondary mt-3">
+
+                <form class="d-flex" method="post" action="/subscribe/">
+                    {% csrf_token %}
+                    <input type="email" name="email" class="form-control form-control-sm me-2" placeholder="Your email" required>
+                    <button class="btn btn-primary btn-sm" type="submit">Subscribe</button>
+                </form>
+            </div>
+        </div>
+
+        <div class="row mt-4">
+            <div class="col text-center small">
+                &copy; {% now "Y" %} Fatima's Restaurant. All rights reserved. Built with <i class="bi bi-heart-fill" style="color: #87cefa;"></i>
+            </div>
+        </div>
+    </div>
+</footer>
