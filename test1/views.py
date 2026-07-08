@@ -10,6 +10,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.models import User
+from django.db.models import Q
 
 
 
@@ -71,6 +72,7 @@ def logoutuser(request):
 
 def findproduct(request):
     search_term = request.GET.get('prod_search', '').strip()
+    no_results = False
     if search_term:
         product_info = Product.objects.filter(
             Q(product_name__icontains=search_term) |
@@ -78,11 +80,11 @@ def findproduct(request):
             Q(product_category__icontains=search_term)
         ).distinct()
         if not product_info.exists():
-            messages.info(request, f'No products matched "{search_term}".')
+            no_results = True
     else:
         product_info = Product.objects.all()
 
-    return render(request, "test1/home.html", {"product_info": product_info})
+    return render(request, "test1/home.html", {"product_info": product_info, "no_results": no_results, "search_term": search_term})
 
 
 @login_required(login_url='loginuser')
@@ -110,13 +112,7 @@ def contact(request):
     
     return render(request, "test1/contact.html", {'form': form})
 
-@login_required(login_url='loginuser')
-def product(request):
-    my_product = Product.objects.all()
-    paginator = Paginator(my_product, 3)
-    page_number = request.GET.get("page")
-    page_obj = paginator.get_page(page_number)
-    return render(request, "test1/product.html", {"page_obj": page_obj})
+
 
 def about(request):
     return render(request, 'test1/about.html')

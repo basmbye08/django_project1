@@ -48,6 +48,24 @@
         </div>
     </section>
     
+    <!-- Messages -->
+    {% if messages %}
+    <div class="container mt-3">
+        {% for message in messages %}
+        <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+            {{ message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+
+    {% if no_results %}
+    <div class="container mt-3">
+        <div class="alert alert-warning" role="alert">No products found for "{{ search_term }}".</div>
+    </div>
+    {% endif %}
+    
 
     <main class="container my-5">
         <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-5">
@@ -55,7 +73,13 @@
             <div class="col">
                 <div class="card product-card h-100 shadow-sm">
                     <div style="height: 250px; overflow: hidden;">
+                        {% if product.product_img %}
                         <img src="{{ product.product_img.url }}" class="img-fluid w-100" alt="{{ product.product_name }}" style="object-fit: cover; height: 100%;">
+                        {% else %}
+                        <div class="bg-light d-flex align-items-center justify-content-center" style="width: 100%; height: 250px;">
+                            <span class="text-muted">No image available</span>
+                        </div>
+                        {% endif %}
                     </div>
                     <div class="card-body d-flex flex-column">
                         <div class="d-flex justify-content-between align-items-start mb-3">

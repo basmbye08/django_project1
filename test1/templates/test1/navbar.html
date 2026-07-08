@@ -27,7 +27,7 @@
         </form>
         <div class="d-flex gap-2 align-items-center flex-nowrap">
           {% if request.user.is_authenticated %}
-          <span class="nav-link text-white py-0 px-2 mb-0">Welcome, {{ request.user.username }}</span>
+          <span class="nav-link text-white py-0 px-2 mb-0">Welcome, {{ request.user.first_name}}</span>
           <a class="nav-link active py-0 px-2" href="{% url 'logout' %}">Logout</a>
           {% else %}
           <a class="nav-link active py-0 px-2" href="{% url 'loginuser' %}">Login</a>
